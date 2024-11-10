@@ -1,4 +1,4 @@
-package com.improveit.ImproveIt.domain.usuario;
+package com.improveit.ImproveIt.domain.pilar;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,23 +11,16 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table(name = "usuario")
+@Table(name = "pilares")
 @Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public class Pilar {
     @Id
     @GeneratedValue
-    private UUID id;
+    private UUID id_pilar;
+    private String nome_pilar;
 
-    private String username;
-    private String senha;
-    private String nome;
-    private Boolean status;
-    private Boolean cargo;
 }
-
-
-
