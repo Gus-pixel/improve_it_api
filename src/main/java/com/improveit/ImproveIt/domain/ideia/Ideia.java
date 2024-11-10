@@ -1,5 +1,6 @@
-package com.improveit.ImproveIt.domain.user;
+package com.improveit.ImproveIt.domain.ideia;
 
+import com.improveit.ImproveIt.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
