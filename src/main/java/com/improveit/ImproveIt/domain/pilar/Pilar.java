@@ -1,4 +1,4 @@
-package com.improveit.ImproveIt.domain.user;
+package com.improveit.ImproveIt.domain.pilar;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
