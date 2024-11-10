@@ -1,4 +1,4 @@
-package com.improveit.ImproveIt.domain.user;
+package com.improveit.ImproveIt.domain.usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +25,8 @@ public class Usuario {
     private  String username;
     private  String senha;
     private  String nome;
-    private  String email;
     private  Boolean status;
+    private  Boolean cargo;
 }
 
 
