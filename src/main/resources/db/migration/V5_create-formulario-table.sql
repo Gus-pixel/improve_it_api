@@ -1,4 +1,4 @@
-CREATE EXTENSION IF NOT EXISTS "pgcrypto"
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 CREATE TABLE IF NOT EXISTS "formulario" {
     id UUID DEFAULT get_random_uuid() PRIMARY KEY,
@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS "formulario" {
     id_setor UUID,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_setor) REFERENCES setor(id)
-    }
+}
