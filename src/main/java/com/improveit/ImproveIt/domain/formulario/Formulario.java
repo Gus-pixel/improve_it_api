@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,17 +28,16 @@ public class Formulario {
     private String titulo;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "id_setor")
+    @JoinColumn(name = "id_setor", nullable = false)
     private Setor setor;
 
+    @CreationTimestamp
     private LocalDateTime dataCriacao;
 
-    private Boolean status;
+    private Boolean status = true;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "formulario")
-    private List<com.improveit.ImproveIt.domain.formulario.Questao> questoes;
-}
+    }
