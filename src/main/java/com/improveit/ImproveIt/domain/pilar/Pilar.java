@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table(name = "pilares")
+@Table(name = "pilar")
 @Entity
 @Getter
 @Setter
@@ -22,5 +22,6 @@ public class Pilar {
     @GeneratedValue
     private UUID id_pilar;
     private String nome_pilar;
+    private Boolean status_pilar;
 
 }
