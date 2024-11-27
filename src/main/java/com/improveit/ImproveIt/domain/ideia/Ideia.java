@@ -25,7 +25,7 @@ public class Ideia {
     private String titulo;
     private String desc_ideia;
     private String desc_problema;
-    private Date data_ideia;
+    private Date data;
     private Boolean status;
 
     @ManyToOne
