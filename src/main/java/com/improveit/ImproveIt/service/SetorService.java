@@ -19,8 +19,8 @@ public class SetorService {
 
     public Setor createSetor(SetorRequestDTO data) {
         Setor newSetor = new Setor();
-        newSetor.setId_setor(data.id());
-        newSetor.setNome_setor(data.nome_setor());
+        newSetor.setNome(data.nome());
+        newSetor.setStatus(data.status());
 
         setorRepository.save(newSetor);
         return newSetor;
@@ -30,8 +30,11 @@ public class SetorService {
         Setor existingSetor = setorRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Setor não encontrado com o UUID: " + uuid));
 
-        if (data.nome_setor() != null) {
-            existingSetor.setNome_setor(data.nome_setor());
+        if (data.nome() != null) {
+            existingSetor.setNome(data.nome());
+        }
+        if(data.status() != null) {
+            existingSetor.setStatus(data.status());
         }
 
         return setorRepository.save(existingSetor);
@@ -40,6 +43,7 @@ public class SetorService {
     public List<Setor> getSetores(){
         return setorRepository.findAll();
     }
+
     public Setor getSetorById(UUID id) {
         return setorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException
                 ("Setor com o ID " + id + " não encontrado."));

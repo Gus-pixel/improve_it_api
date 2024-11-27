@@ -5,8 +5,6 @@ CREATE TABLE IF NOT EXISTS "formulario" {
     titulo VARCHAR(30) NOT NULL,
     data_criacao TIMESTAMP NOT NULL,
     status BOOLEAN NOT NULL,
-    id_usuario UUID,
     id_setor UUID,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_setor) REFERENCES setor(id)
 }

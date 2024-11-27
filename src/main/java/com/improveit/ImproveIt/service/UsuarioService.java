@@ -1,7 +1,9 @@
 package com.improveit.ImproveIt.service;
 
+import com.improveit.ImproveIt.domain.setor.Setor;
 import com.improveit.ImproveIt.domain.usuario.Usuario;
 import com.improveit.ImproveIt.domain.usuario.UsuarioRequestDTO;
+import com.improveit.ImproveIt.repositories.SetorRepository;
 import com.improveit.ImproveIt.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,17 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private SetorRepository setorRepository;
+
     public Usuario createUsuario(UsuarioRequestDTO data){
         Usuario newUsuario = new Usuario();
-        newUsuario.setUsername(data.username());
+        if(data.id_setor() != null){
+            Setor existingSetor = setorRepository.findById(data.id_setor())
+                    .orElseThrow(() -> new EntityNotFoundException("Setor não encontrado com o UUID: " + data.id_setor()));
+            newUsuario.setSetor(existingSetor);
+        }
+        newUsuario.setUsuario(data.usuario());
         newUsuario.setSenha(data.senha());
         newUsuario.setNome(data.nome());
         newUsuario.setStatus(data.status());
@@ -31,8 +41,14 @@ public class UsuarioService {
         Usuario existingUsuario = usuarioRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o UUID: " + uuid));
 
-        if (data.username() != null) {
-            existingUsuario.setUsername(data.username());
+        if(data.id_setor() != null){
+            Setor existingSetor = setorRepository.findById(data.id_setor())
+                    .orElseThrow(() -> new EntityNotFoundException("Setor não encontrado com o UUID: " + data.id_setor()));
+            existingUsuario.setSetor(existingSetor);
+        }
+
+        if (data.usuario() != null) {
+            existingUsuario.setUsuario(data.usuario());
         }
         if (data.senha() != null) {
             existingUsuario.setSenha(data.senha());
@@ -58,6 +74,19 @@ public class UsuarioService {
     public Usuario getUsuarioById(UUID uuid) {
         return usuarioRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário com ID " + uuid + " não encontrado."));
+    }
+
+    public Usuario login(String usuario, String senha) {
+        Usuario existingUsuario = usuarioRepository.findByUsuario(usuario)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+       boolean isValid = senha.equals(existingUsuario.getSenha());
+
+       if(isValid){
+           return existingUsuario;
+       }else {
+           return null;
+       }
     }
 
 }

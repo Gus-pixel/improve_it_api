@@ -17,8 +17,8 @@ public class PilarService {
 
     public Pilar createPilar(PilarRequestDTO data){
         Pilar newPilar = new Pilar();
-        newPilar.setNome_pilar(data.nome_pilar());
-        newPilar.setStatus_pilar(data.status_pilar());
+        newPilar.setNome(data.nome());
+        newPilar.setStatus(data.status());
 
         pilarRepository.save(newPilar);
         return newPilar;
@@ -29,11 +29,11 @@ public class PilarService {
         Pilar existingPilar = pilarRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Pilar não encontrado com o UUID!"+uuid));
 
-        if (data.nome_pilar() != null){
-            existingPilar.setNome_pilar(data.nome_pilar());
+        if (data.nome() != null){
+            existingPilar.setNome(data.nome());
         }
-        if (data.status_pilar() != null){
-            existingPilar.setStatus_pilar(data.status_pilar());
+        if (data.status() != null){
+            existingPilar.setStatus(data.status());
         }
 
         return pilarRepository.save(existingPilar);

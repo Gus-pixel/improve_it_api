@@ -18,7 +18,8 @@ import java.util.UUID;
 public class Setor {
     @Id
     @GeneratedValue
-    private UUID id_setor;
+    private UUID id;
 
-    private String nome_setor;
+    private String nome;
+    private Boolean status;
 }

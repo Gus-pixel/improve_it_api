@@ -29,7 +29,6 @@ public class QuestaoService {
             newQuestao.setFormulario(existingFormulario);
         }
         newQuestao.setTexto_pergunta(data.texto_pergunta());
-        newQuestao.setNota(data.nota());
 
         questaoRepository.save(newQuestao);
         return newQuestao;
@@ -45,9 +44,6 @@ public class QuestaoService {
                 .orElseThrow(() -> new EntityNotFoundException("Questão não encontrada com o UUID: " + id));
         if (data.texto_pergunta() != null){
             existingQuestao.setTexto_pergunta(data.texto_pergunta());
-        }
-        if (data.nota() != null){
-            existingQuestao.setNota(data.nota());
         }
         if (data.id_formulario() != null){
             Formulario existingFormulario = formularioRepository.findById(data.id_formulario())

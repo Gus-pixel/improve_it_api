@@ -1,16 +1,13 @@
 package com.improveit.ImproveIt.domain.formulario;
 
 import com.improveit.ImproveIt.domain.setor.Setor;
-import com.improveit.ImproveIt.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 import java.util.UUID;
 
 @Table(name = "formulario")
@@ -26,18 +23,11 @@ public class Formulario {
     private UUID id;
 
     private String titulo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    private Date dataCriacao;
+    private Boolean status = true;
 
     @ManyToOne
     @JoinColumn(name = "id_setor", nullable = false)
     private Setor setor;
-
-    @CreationTimestamp
-    private LocalDateTime dataCriacao;
-
-    private Boolean status = true;
 
     }

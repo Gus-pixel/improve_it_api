@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/setor")
 public class SetorController {
 
@@ -36,7 +37,7 @@ public class SetorController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<Setor> getSetores(@PathVariable UUID uuid) {
+    public ResponseEntity<Setor> getSetor(@PathVariable UUID uuid) {
         Setor setor = this.setorService.getSetorById(uuid);
         return ResponseEntity.ok(setor);
     }
