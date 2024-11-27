@@ -1,7 +1,6 @@
 package com.improveit.ImproveIt.domain.formulario;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -22,18 +21,13 @@ public class Questao {
     @Column(updatable = false, nullable = false, unique = true)
     private UUID id;
 
-    @NotBlank(message = "O texto da pergunta não pode estar vazio.")
-    @Size(max = 255, message = "O texto da pergunta não pode exceder 255 caracteres.")
     @Column(nullable = false)
     private String texto_pergunta;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_formulario", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "formulario_id")
     private Formulario formulario;
 
-    @NotNull(message = "A nota não pode ser nula.")
-    @Min(value = 1, message = "A nota mínima é 1.")
-    @Max(value = 5, message = "A nota máxima é 5.")
     private Integer nota;
 
     @Override

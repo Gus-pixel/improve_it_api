@@ -44,7 +44,6 @@ public class FormularioService {
         newFormulario.setTitulo(data.titulo());
         newFormulario.setStatus(data.status());
         newFormulario.setDataCriacao(data.dataCriacao());
-        newFormulario.setQuestoes(data.questoes());
 
         formularioRepository.save(newFormulario);
         return newFormulario;
@@ -80,7 +79,6 @@ public class FormularioService {
 
         formularioExistente.setTitulo(data.titulo());
         formularioExistente.setStatus(data.status());
-        formularioExistente.setQuestoes(data.questoes());
         formularioExistente.setDataCriacao(data.dataCriacao());
 
         formularioRepository.save(formularioExistente);

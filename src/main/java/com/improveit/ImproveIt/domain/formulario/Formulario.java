@@ -40,6 +40,4 @@ public class Formulario {
 
     private Boolean status = true;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "formulario", orphanRemoval = true)
-    private List<Questao> questoes;
-}
+    }

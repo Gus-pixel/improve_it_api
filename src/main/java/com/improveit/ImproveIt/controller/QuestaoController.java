@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/questoes")
+@RequestMapping("/questao")
 public class QuestaoController {
 
     @Autowired
@@ -27,6 +27,12 @@ public class QuestaoController {
     public ResponseEntity<List<Questao>> listarQuestoes() {
         List<Questao> questoes = questaoService.listarQuestoes();
         return ResponseEntity.ok(questoes);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Questao>atualizarQuestao(@PathVariable UUID id, @RequestBody QuestaoRequestDTO body) {
+        Questao questao = questaoService.atualizarQuestao(id, body);
+        return ResponseEntity.ok(questao);
     }
 
     @GetMapping("/{id}")

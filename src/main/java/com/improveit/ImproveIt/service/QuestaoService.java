@@ -35,13 +35,31 @@ public class QuestaoService {
         return newQuestao;
     }
 
+
     public List<Questao> listarQuestoes() {
         return questaoRepository.findAll();
     }
 
-    public Questao obterQuestao(UUID uuid) {
-        return questaoRepository.findById(uuid)
-                .orElseThrow(() -> new EntityNotFoundException("Questão com ID " + uuid + " não encontrado."));
+    public Questao atualizarQuestao (UUID id, QuestaoRequestDTO data) {
+        Questao existingQuestao = questaoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Questão não encontrada com o UUID: " + id));
+        if (data.texto_pergunta() != null){
+            existingQuestao.setTexto_pergunta(data.texto_pergunta());
+        }
+        if (data.nota() != null){
+            existingQuestao.setNota(data.nota());
+        }
+        if (data.id_formulario() != null){
+            Formulario existingFormulario = formularioRepository.findById(data.id_formulario())
+                    .orElseThrow(() -> new EntityNotFoundException("Formulario não encontrado com o UUID: " + data.id_formulario()));
+            existingQuestao.setFormulario(existingFormulario);
+        }
+        return questaoRepository.save(existingQuestao);
+    }
+
+    public Questao obterQuestao(UUID id) {
+        return questaoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Questão com ID " + id + " não encontrado."));
     }
 
     public void excluirQuestao(UUID id) {
