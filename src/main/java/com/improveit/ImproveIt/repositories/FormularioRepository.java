@@ -8,6 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface FormularioRepository extends JpaRepository<Formulario, UUID> {
-    // Adicione consultas personalizadas se necessário, como:
-    // Optional<Formulario> findByTitulo(String titulo);
+
 }

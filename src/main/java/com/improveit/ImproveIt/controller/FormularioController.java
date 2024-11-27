@@ -2,7 +2,6 @@ package com.improveit.ImproveIt.controller;
 
 import com.improveit.ImproveIt.domain.formulario.Formulario;
 import com.improveit.ImproveIt.service.FormularioService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,7 @@ public class FormularioController {
 
     // Criar um novo formulário
     @PostMapping
-    public ResponseEntity<Formulario> criarFormulario(@Valid @RequestBody Formulario formulario) {
+    public ResponseEntity<Formulario> criarFormulario(@RequestBody Formulario formulario) {
         Formulario novoFormulario = formularioService.salvarFormulario(formulario);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoFormulario);
     }
@@ -30,7 +29,7 @@ public class FormularioController {
     // Obter um formulário por ID
     @GetMapping("/{id}")
     public ResponseEntity<Formulario> obterFormularioPorId(@PathVariable UUID id) {
-        Formulario formulario = formularioService.buscarPorId(id);
+        Formulario formulario = formularioService.obterFormulario(id);
         if (formulario == null) {
             return ResponseEntity.notFound().build();
         }
@@ -40,7 +39,7 @@ public class FormularioController {
     // Listar todos os formulários
     @GetMapping
     public ResponseEntity<List<Formulario>> listarFormularios() {
-        List<Formulario> formularios = formularioService.listarTodos();
+        List<Formulario> formularios = formularioService.listarFormularios();
         return ResponseEntity.ok(formularios);
     }
 
@@ -48,7 +47,7 @@ public class FormularioController {
     @PutMapping("/{id}")
     public ResponseEntity<Formulario> atualizarFormulario(
             @PathVariable UUID id,
-            @Valid @RequestBody Formulario formularioAtualizado
+            @RequestBody Formulario formularioAtualizado
     ) {
         if (!id.equals(formularioAtualizado.getId())) {
             return ResponseEntity.badRequest().build();

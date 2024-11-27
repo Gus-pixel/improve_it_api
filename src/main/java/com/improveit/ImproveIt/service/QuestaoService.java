@@ -6,7 +6,6 @@ import com.improveit.ImproveIt.domain.formulario.QuestaoRequestDTO;
 import com.improveit.ImproveIt.repositories.FormularioRepository;
 import com.improveit.ImproveIt.repositories.QuestaoRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class QuestaoService {
     @Autowired
     private FormularioRepository formularioRepository;
 
-    public Questao salvarQuestao(@Valid QuestaoRequestDTO data) {
+    public Questao salvarQuestao(QuestaoRequestDTO data) {
         Questao newQuestao = new Questao();
         if(data.id_formulario() != null){
             Formulario existingFormulario = formularioRepository.findById(data.id_formulario())
