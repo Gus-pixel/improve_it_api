@@ -20,8 +20,8 @@ import java.util.UUID;
 public class Pilar {
     @Id
     @GeneratedValue
-    private UUID id_pilar;
-    private String nome_pilar;
-    private Boolean status_pilar;
+    private UUID id;
+    private String nome;
+    private Boolean status;
 
 }
