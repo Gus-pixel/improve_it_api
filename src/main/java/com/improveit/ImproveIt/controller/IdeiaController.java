@@ -2,7 +2,6 @@ package com.improveit.ImproveIt.controller;
 
 import com.improveit.ImproveIt.domain.ideia.Ideia;
 import com.improveit.ImproveIt.domain.ideia.IdeiaRequestDTO;
-import com.improveit.ImproveIt.domain.usuario.Usuario;
 import com.improveit.ImproveIt.service.IdeiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/ideia")
 public class IdeiaController {
 

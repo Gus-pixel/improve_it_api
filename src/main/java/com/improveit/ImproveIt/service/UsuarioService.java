@@ -17,7 +17,7 @@ public class UsuarioService {
 
     public Usuario createUsuario(UsuarioRequestDTO data){
         Usuario newUsuario = new Usuario();
-        newUsuario.setUsername(data.username());
+        newUsuario.setUsuario(data.usuario());
         newUsuario.setSenha(data.senha());
         newUsuario.setNome(data.nome());
         newUsuario.setStatus(data.status());
@@ -31,8 +31,8 @@ public class UsuarioService {
         Usuario existingUsuario = usuarioRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o UUID: " + uuid));
 
-        if (data.username() != null) {
-            existingUsuario.setUsername(data.username());
+        if (data.usuario() != null) {
+            existingUsuario.setUsuario(data.usuario());
         }
         if (data.senha() != null) {
             existingUsuario.setSenha(data.senha());

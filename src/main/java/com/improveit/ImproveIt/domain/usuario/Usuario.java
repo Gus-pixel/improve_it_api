@@ -22,7 +22,7 @@ public class Usuario {
     @GeneratedValue
     private UUID id;
 
-    private String username;
+    private String usuario;
     private String senha;
     private String nome;
     private Boolean status;

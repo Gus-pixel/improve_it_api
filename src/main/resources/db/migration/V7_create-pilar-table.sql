@@ -1,5 +1,5 @@
-ALTER TABLE pilares
-RENAME COLUMN nome_pilar to nome;
+ALTER TABLE pilar
+RENAME COLUMN nome_pilar TO nome;
 
-ALTER TABLE pilares
-RENAME COLUMN status_pilar to status;
+ALTER TABLE pilar
+RENAME COLUMN status_pilar TO status;
