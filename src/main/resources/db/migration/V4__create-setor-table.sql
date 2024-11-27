@@ -4,5 +4,6 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 CREATE TABLE setor (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    nome_setor VARCHAR(20)
+    nome VARCHAR(20),
+    status BOOLEAN
 );
