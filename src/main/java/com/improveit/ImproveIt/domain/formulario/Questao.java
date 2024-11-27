@@ -28,8 +28,6 @@ public class Questao {
     @JoinColumn(name = "formulario_id")
     private Formulario formulario;
 
-    private Integer nota;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
