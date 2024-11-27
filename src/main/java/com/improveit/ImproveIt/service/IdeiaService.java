@@ -29,7 +29,7 @@ public class IdeiaService {
         newIdeia.setTitulo(data.titulo());
         newIdeia.setDesc_ideia(data.desc_ideia());
         newIdeia.setDesc_problema(data.desc_problema());
-        newIdeia.setData_ideia(data.data_ideia());
+        newIdeia.setData(data.data());
         newIdeia.setStatus(data.status());
 
         ideiaRepository.save(newIdeia);
@@ -37,8 +37,8 @@ public class IdeiaService {
     }
 
     public Ideia updateIdeia(UUID uuid, IdeiaRequestDTO data) {
-        Ideia existingIdeia = ideiaRepository.findById(uuid).
-                orElseThrow(() -> new EntityNotFoundException("Ideia não encontrado com o UUID: " + uuid));
+        Ideia existingIdeia = ideiaRepository.findById(uuid)
+                .orElseThrow(() -> new EntityNotFoundException("Ideia não encontrado com o UUID: " + uuid));
 
         if (data.titulo() != null) {
             existingIdeia.setTitulo(data.titulo());
@@ -49,8 +49,8 @@ public class IdeiaService {
         if (data.desc_problema() != null) {
             existingIdeia.setDesc_problema(data.desc_problema());
         }
-        if (data.data_ideia() != null) {
-            existingIdeia.setData_ideia(data.data_ideia());
+        if (data.data() != null) {
+            existingIdeia.setData(data.data());
         }
         if (data.status() != null) {
             existingIdeia.setStatus(data.status());
