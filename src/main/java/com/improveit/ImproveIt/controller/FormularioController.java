@@ -1,8 +1,9 @@
 package com.improveit.ImproveIt.controller;
 
 import com.improveit.ImproveIt.domain.formulario.Formulario;
+import com.improveit.ImproveIt.domain.formulario.FormularioRequestDTO;
 import com.improveit.ImproveIt.service.FormularioService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,29 +11,26 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/formularios")
+@RequestMapping("/formularios")
 public class FormularioController {
 
-    private final FormularioService formularioService;
-
-    public FormularioController(FormularioService formularioService) {
-        this.formularioService = formularioService;
-    }
+    @Autowired
+    private FormularioService formularioService;
 
     // Criar um novo formulário
     @PostMapping
-    public ResponseEntity<Formulario> criarFormulario(@RequestBody Formulario formulario) {
-        Formulario novoFormulario = formularioService.salvarFormulario(formulario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoFormulario);
+    public ResponseEntity<Formulario> criarFormulario(@RequestBody FormularioRequestDTO body) {
+        Formulario novoFormulario = this.formularioService.salvarFormulario(body);
+        return ResponseEntity.ok(novoFormulario);
     }
 
-    // Obter um formulário por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Formulario> obterFormularioPorId(@PathVariable UUID id) {
-        Formulario formulario = formularioService.obterFormulario(id);
-        if (formulario == null) {
-            return ResponseEntity.notFound().build();
-        }
+    // Atualizar um formulário existente
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Formulario> atualizarFormulario(
+            @PathVariable UUID uuid,
+            @RequestBody FormularioRequestDTO body
+    ) {
+        Formulario formulario = this.formularioService.atualizarFormulario(uuid, body);
         return ResponseEntity.ok(formulario);
     }
 
@@ -43,27 +41,17 @@ public class FormularioController {
         return ResponseEntity.ok(formularios);
     }
 
-    // Atualizar um formulário existente
-    @PutMapping("/{id}")
-    public ResponseEntity<Formulario> atualizarFormulario(
-            @PathVariable UUID id,
-            @RequestBody Formulario formularioAtualizado
-    ) {
-        if (!id.equals(formularioAtualizado.getId())) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        Formulario formulario = formularioService.atualizarFormulario(id, formularioAtualizado);
-        if (formulario == null) {
-            return ResponseEntity.notFound().build();
-        }
+    // Obter um formulário por ID
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Formulario> obterFormularioPorId(@PathVariable UUID uuid) {
+        Formulario formulario = formularioService.obterFormulario(uuid);
         return ResponseEntity.ok(formulario);
     }
 
     // Deletar um formulário
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarFormulario(@PathVariable UUID id) {
-        boolean deleted = formularioService.deletarFormulario(id);
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deletarFormulario(@PathVariable UUID uuid) {
+        boolean deleted = formularioService.deletarFormulario(uuid);
         if (!deleted) {
             return ResponseEntity.notFound().build();
         }

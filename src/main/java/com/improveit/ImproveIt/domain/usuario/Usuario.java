@@ -28,6 +28,3 @@ public class Usuario {
     private Boolean status;
     private Boolean cargo;
 }
-
-
-

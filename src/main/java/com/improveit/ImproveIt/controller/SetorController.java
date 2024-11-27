@@ -13,6 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/setor")
 public class SetorController {
+
     @Autowired
     private SetorService setorService;
 
