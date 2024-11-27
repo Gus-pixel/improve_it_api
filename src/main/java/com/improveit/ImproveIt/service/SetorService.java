@@ -43,6 +43,7 @@ public class SetorService {
     public List<Setor> getSetores(){
         return setorRepository.findAll();
     }
+
     public Setor getSetorById(UUID id) {
         return setorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException
                 ("Setor com o ID " + id + " não encontrado."));

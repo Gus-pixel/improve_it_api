@@ -1,9 +1,7 @@
 package com.improveit.ImproveIt.domain.usuario;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.improveit.ImproveIt.domain.setor.Setor;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +25,8 @@ public class Usuario {
     private String nome;
     private Boolean status;
     private Boolean cargo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_setor")
+    private Setor setor;
 }
