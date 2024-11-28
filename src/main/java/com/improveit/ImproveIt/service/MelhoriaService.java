@@ -2,8 +2,10 @@ package com.improveit.ImproveIt.service;
 
 import com.improveit.ImproveIt.domain.melhoria.Melhoria;
 import com.improveit.ImproveIt.domain.melhoria.MelhoriaRequestDTO;
+import com.improveit.ImproveIt.domain.pilar.Pilar;
 import com.improveit.ImproveIt.domain.usuario.Usuario;
 import com.improveit.ImproveIt.repositories.MelhoriaRepository;
+import com.improveit.ImproveIt.repositories.PilarRepository;
 import com.improveit.ImproveIt.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class MelhoriaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PilarRepository pilarRepository;
+
     public Melhoria create(MelhoriaRequestDTO data){
         Melhoria newMelhoria = new Melhoria();
         if(data.id_usuario() != null){
@@ -27,7 +32,14 @@ public class MelhoriaService {
                     .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrado com o UUID: " + data.id_usuario()));
             newMelhoria.setUsuario(existingUsuario);
         }
+
+        if(data.id_pilar() != null){
+            Pilar existingPilar = pilarRepository.findById(data.id_pilar())
+                    .orElseThrow(() -> new EntityNotFoundException("Pilar não encontrado com o UUID: " + data.id_pilar()));
+            newMelhoria.setPilar(existingPilar);
+        }
         newMelhoria.setDesc_problema(data.desc_problema());
+        newMelhoria.setDesc_melhoria(data.desc_melhoria());
         newMelhoria.setData(data.data());
         newMelhoria.setStatus(data.status());
 

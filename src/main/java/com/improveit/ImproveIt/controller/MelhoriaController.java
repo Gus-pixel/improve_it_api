@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/ideia")
+@RequestMapping("/melhoria")
 public class MelhoriaController {
 
     @Autowired

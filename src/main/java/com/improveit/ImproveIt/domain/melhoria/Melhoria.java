@@ -17,7 +17,6 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Melhoria {
     @Id
     @GeneratedValue
