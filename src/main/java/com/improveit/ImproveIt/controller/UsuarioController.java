@@ -1,6 +1,5 @@
 package com.improveit.ImproveIt.controller;
 
-import com.improveit.ImproveIt.domain.usuario.LoginRequestDTO;
 import com.improveit.ImproveIt.domain.usuario.Usuario;
 import com.improveit.ImproveIt.domain.usuario.UsuarioRequestDTO;
 import com.improveit.ImproveIt.service.UsuarioService;
@@ -43,16 +42,6 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
-    @PostMapping("/usuario")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDTO body) {
-        Usuario usuario = usuarioService.login(body.usuario(), body.senha());
-
-        if (usuario != null) {
-            return ResponseEntity.ok(usuario);
-        } else {
-            return ResponseEntity.status(401).body("Credenciais inválidas");
-        }
-    }
 }
 
 

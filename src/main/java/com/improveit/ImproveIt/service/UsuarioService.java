@@ -1,10 +1,12 @@
 package com.improveit.ImproveIt.service;
 
 import com.improveit.ImproveIt.domain.setor.Setor;
+import com.improveit.ImproveIt.domain.usuario.LoginRequestDTO;
 import com.improveit.ImproveIt.domain.usuario.Usuario;
 import com.improveit.ImproveIt.domain.usuario.UsuarioRequestDTO;
 import com.improveit.ImproveIt.repositories.SetorRepository;
 import com.improveit.ImproveIt.repositories.UsuarioRepository;
+import com.improveit.ImproveIt.utils.CredenciaisInvalidasException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,17 +78,10 @@ public class UsuarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Usuário com ID " + uuid + " não encontrado."));
     }
 
-    public Usuario login(String usuario, String senha) {
-        Usuario existingUsuario = usuarioRepository.findByUsuario(usuario)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
-
-       boolean isValid = senha.equals(existingUsuario.getSenha());
-
-       if(isValid){
-           return existingUsuario;
-       }else {
-           return null;
-       }
+    public Usuario login(LoginRequestDTO data) {
+        return usuarioRepository.findByUsuario(data.usuario())
+                .filter(u -> u.getSenha().equals(data.senha()))
+                .orElseThrow(() -> new CredenciaisInvalidasException("Usuário ou senha incorretos"));
     }
 
 }

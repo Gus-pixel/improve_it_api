@@ -40,6 +40,7 @@ public class MelhoriaService {
         }
         newMelhoria.setDesc_problema(data.desc_problema());
         newMelhoria.setDesc_melhoria(data.desc_melhoria());
+        newMelhoria.setAprovacao(data.aprovacao());
         newMelhoria.setData(data.data());
         newMelhoria.setStatus(data.status());
 
@@ -60,6 +61,11 @@ public class MelhoriaService {
         if (data.status() != null) {
             existingMelhoria.setStatus(data.status());
         }
+
+        if (data.aprovacao() != null) {
+            existingMelhoria.setAprovacao(data.aprovacao());
+        }
+
         if(data.id_usuario() != null){
             Usuario existingUsuario = usuarioRepository.findById(data.id_usuario())
                     .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrado com o UUID: " + data.id_usuario()));
